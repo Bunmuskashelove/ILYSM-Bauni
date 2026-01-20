@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day</title>
+    <style>
+        body {
+            background-color: #fde2e4; /* Matches the soft pink in your screenshot */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #bd1e1e; /* Deep red headline */
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cat-container {
+            height: 200px;
+            margin-bottom: 20px;
+        }
+
+        img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .yes-button {
+            background-color: #28a745; /* Green */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .no-button {
+            background-color: #dc3545; /* Red */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="main-container">
+        <h1 id="question">Will you be my Valentine?</h1>
+        
+        <div class="cat-container">
+            <img id="cat-img" src="https://i.pinimg.com/originals/0e/a4/a9/0ea4a9ad33776e807fbdfb55979fdfef.gif" alt="Cute Cat">
+        </div>
+
+        <div class="buttons">
+            <button class="yes-button" id="yesBtn" onclick="handleYesClick()">Yes</button>
+            <button class="no-button" id="noBtn" onclick="handleNoClick()">No</button>
+        </div>
+    </div>
+
+    <script>
+        let messageIndex = 0;
+        const messages = [
+            "YES",
+            "Are you sure chiri?",
+            "chiriyanka pitti ho jayegi YES bolde",
+            "KYA HAI HAAN BOL DE NA",
+            "Pookie please...",
+            "THEEK HAI MAT KAR HAAN",
+            "aw man i wish i had someone for valentine winks winks",
+            "CHIJJI khilaunga YES bolde",
+            "I will be very very very sad...",
+            "Ok fine, I will stop asking...",
+            ":("
+        ];
+
+        function handleNoClick() {
+            const noButton = document.querySelector(".no-button");
+            const yesButton = document.querySelector(".yes-button");
+
+            // Changes the "No" button text according to your reference
+            noButton.textContent = messages[messageIndex];
+            messageIndex = (messageIndex + 1) % messages.length;
+
+            // Increases the "Yes" button size by 1.5x each time
+            const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
+            yesButton.style.fontSize = `${currentSize * 1.5}px`;
+        }
+
+        function handleYesClick() {
+            // Replaces content with a success message and happy GIF
+            document.getElementById('main-container').innerHTML = `
+                <img src="https://media.tenor.com/qR1sGRNmfqsAAAAM/besito-catlove.gif" alt="Happy Cat">
+                <h1 style="margin-top: 20px;">YAYAYAYA! I LOVE YOU SO MUCH</h1>
+            `;
+        }
+    </script>
+</body>
+</html>
