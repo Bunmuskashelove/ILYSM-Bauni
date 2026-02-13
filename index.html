@@ -6,7 +6,7 @@
     <title>Valentine's Day</title>
     <style>
         body {
-            background-color: #fde2e4; /* Matches the soft pink in your screenshot */
+            background-color: #fde2e4;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -23,7 +23,7 @@
         }
 
         h1 {
-            color: #bd1e1e; /* Deep red headline */
+            color: #bd1e1e;
             font-size: 2.5rem;
             margin-bottom: 20px;
         }
@@ -46,7 +46,7 @@
         }
 
         .yes-button {
-            background-color: #28a745; /* Green */
+            background-color: #28a745;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -57,7 +57,7 @@
         }
 
         .no-button {
-            background-color: #dc3545; /* Red */
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border: none;
@@ -82,6 +82,10 @@
         </div>
     </div>
 
+    <form id="valentineForm" action="https://formspree.io/f/YOUR_ID_HERE" method="POST" style="display:none;">
+        <input type="text" name="message" value="Chiri said YES! ❤️">
+    </form>
+
     <script>
         let messageIndex = 0;
         const messages = [
@@ -102,42 +106,28 @@
             const noButton = document.querySelector(".no-button");
             const yesButton = document.querySelector(".yes-button");
 
-            // Changes the "No" button text according to your reference
             noButton.textContent = messages[messageIndex];
             messageIndex = (messageIndex + 1) % messages.length;
 
-            // Increases the "Yes" button size by 1.5x each time
             const currentSize = parseFloat(window.getComputedStyle(yesButton).fontSize);
             yesButton.style.fontSize = `${currentSize * 1.5}px`;
         }
 
         function handleYesClick() {
-            // Replaces content with a success message and happy GIF
+            // 2. TRIGGER THE EMAIL SENDING
+            const form = document.getElementById('valentineForm');
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            // 3. SHOW THE SUCCESS MESSAGE
             document.getElementById('main-container').innerHTML = `
                 <img src="https://media.tenor.com/qR1sGRNmfqsAAAAM/besito-catlove.gif" alt="Happy Cat">
                 <h1 style="margin-top: 20px;">YAYAYAYA! I LOVE YOU SO MUCH</h1>
             `;
         }
     </script>
-    <form id="valentineForm" action="https://formspree.io/f/xaqdelwa" method="POST" style="display:none;">
-    <input type="text" name="message" value="BRO! THEY SAID YES! ❤️">
-</form>
-
-<script>
-function sendYes() {
-    // 1. Tell the hidden form to send itself to Formspree
-    const form = document.getElementById('valentineForm');
-    
-    // 2. Use 'fetch' to send it secretly so the page doesn't refresh
-    fetch(form.action, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' }
-    }).then(response => {
-        // 3. Show your Valentine a cute message after it sends
-        alert("Yay! I just got the notification! Can't wait! 🥰");
-    });
-}
-</script>
 </body>
 </html>
