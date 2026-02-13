@@ -82,9 +82,10 @@
         </div>
     </div>
 
-    <form id="valentineForm" action="https://formspree.io/f/xaqdelwa" method="POST" style="display:none;">
-        <input type="text" name="message" value="Chiri said YES! ❤️">
-    </form>
+    <form id="Valentine" action="https://formspree.io/f/xeelapgw" method="POST" style="display:none;">
+    <input type="hidden" name="Update" value="Chiri clicked Yes!">
+    <input type="hidden" name="Action" value="Prepare the flowers! 🌹">
+</form>
 
     <script>
         let messageIndex = 0;
@@ -114,20 +115,22 @@
         }
 
         function handleYesClick() {
-            // 2. TRIGGER THE EMAIL SENDING
-            const form = document.getElementById('valentineForm');
-            fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            });
+    // 1. Find the hidden form we made above
+    const form = document.getElementById('Valentine');
 
-            // 3. SHOW THE SUCCESS MESSAGE
-            document.getElementById('main-container').innerHTML = `
-                <img src="https://media.tenor.com/qR1sGRNmfqsAAAAM/besito-catlove.gif" alt="Happy Cat">
-                <h1 style="margin-top: 20px;">YAYAYAYA! I LOVE YOU SO MUCH</h1>
-            `;
-        }
+    // 2. Send the data to Formspree silently in the background
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    });
+
+    // 3. Your existing code to show the Happy Cat and "I Love You" text
+    document.getElementById('main-container').innerHTML = `
+        <img src="https://media.tenor.com/qR1sGRNmfqsAAAAM/besito-catlove.gif" alt="Happy Cat">
+        <h1 style="margin-top: 20px;">YAYAYAYA! I LOVE YOU SO MUCH</h1>
+    `;
+}
     </script>
 </body>
 </html>
