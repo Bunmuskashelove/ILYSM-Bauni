@@ -119,5 +119,25 @@
             `;
         }
     </script>
+    <form id="valentineForm" action="https://formspree.io/f/xaqdelwa" method="POST" style="display:none;">
+    <input type="text" name="message" value="BRO! THEY SAID YES! ❤️">
+</form>
+
+<script>
+function sendYes() {
+    // 1. Tell the hidden form to send itself to Formspree
+    const form = document.getElementById('valentineForm');
+    
+    // 2. Use 'fetch' to send it secretly so the page doesn't refresh
+    fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        // 3. Show your Valentine a cute message after it sends
+        alert("Yay! I just got the notification! Can't wait! 🥰");
+    });
+}
+</script>
 </body>
 </html>
